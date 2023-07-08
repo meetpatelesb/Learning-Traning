@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC TAC TOE</title>
+    <style>
+        body {
+            background-color: rgb(71, 157, 226);
+        }
+        
+        #title {
+            margin: 2% 33%;
+        }
+        
+        #table {
+            font-size: 55px;
+            margin: 2% 35%;
+            background-color: yellow;
+            height: 370px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        
+        .td {
+            text-align: center;
+            width: 120px;
+            height: 120px;
+        }
+        
+        #info {
+            color: rgb(4, 3, 15);
+            font-size: 22px;
+            margin: 1% 35%;
+            display: flex;
+        }
+        
+        #info-1 {
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="title">WELCOME TO THE TIC TAK TOE...</h2>
+    <span id="result"></span>
+    <span id="result_1"></span>
+    <table id="table" border="1">
+        <tr id="tr-1">
+            <td id="td1" class="td" onclick="cross(this)"></td>
+            <td id="td2" class="td" onclick="cross(this)"></td>
+            <td id="td3" class="td" onclick="cross(this)"></td>
+        </tr>
+
+        <tr id="tr-2">
+            <td id="td4" class="td" onclick="cross(this)"></td>
+            <td id="td5" class="td" onclick="cross(this)"></td>
+            <td id="td6" class="td" onclick="cross(this)"></td>
+        </tr>
+
+        <tr id="tr-3">
+            <td id="td7" class="td" onclick="cross(this)"></td>
+            <td id="td8" class="td" onclick="cross(this)"></td>
+            <td id="td9" class="td" onclick="cross(this)"></td>
+        </tr>
+    </table>
+    <div id="info">
+        <p id="info-1">Player 1 : Cross &nbsp&nbsp </p>
+        <p id="info-2">Player 2 : Zero</p>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    // let meet_Sel = (meet)=>{  document.querySelectorAll(meet);}
+    meetflag = 0;
+    meetTotalMatch = 0;
+    meetCount_1 = 0;
+    meetCount_2 = 0;
+    meetDrawn = 0;
+
+    let meetplayer_1 = (prompt("PLAYER 1 (X) NAME: ", "")).toUpperCase();
+
+    let meetplayer_2 = (prompt("PLAYER 2 (0) NAME: ", "")).toUpperCase();
+
+    if ((meetplayer_1.trim()).length != 0 && (meetplayer_2.trim()).length != 0) {
+        function cross(meet) {
+
+            if (meetflag == 0 && meet.innerHTML == "") {
+                meet.innerHTML = "X";
+                meetflag = 1;
+            } else if (meet.innerHTML == "") {
+                meet.innerHTML = "0";
+                meetflag = 0;
+            }
+
+            var meet_td1 = document.getElementById('td1').innerHTML;
+            var meet_td2 = document.getElementById('td2').innerHTML;
+            var meet_td3 = document.getElementById('td3').innerHTML;
+            var meet_td4 = document.getElementById('td4').innerHTML;
+            var meet_td5 = document.getElementById('td5').innerHTML;
+            var meet_td6 = document.getElementById('td6').innerHTML;
+            var meet_td7 = document.getElementById('td7').innerHTML;
+            var meet_td8 = document.getElementById('td8').innerHTML;
+            var meet_td9 = document.getElementById('td9').innerHTML;
+
+            // rows
+            var meet123 = meet_td1 + meet_td2 + meet_td3;
+            var meet456 = meet_td4 + meet_td5 + meet_td6;
+            var meet789 = meet_td7 + meet_td8 + meet_td9;
+            // cols
+            var meet147 = meet_td1 + meet_td4 + meet_td7;
+            var meet258 = meet_td2 + meet_td5 + meet_td8;
+            var meet369 = meet_td3 + meet_td6 + meet_td9;
+            // diagonals
+            var meet159 = meet_td1 + meet_td5 + meet_td9;
+            var meet357 = meet_td3 + meet_td5 + meet_td7;
+
+            function reset() {
+
+                var meet_td1 = document.getElementById('td1').innerHTML = '';
+                var meet_td2 = document.getElementById('td2').innerHTML = '';
+                var meet_td3 = document.getElementById('td3').innerHTML = '';
+                var meet_td4 = document.getElementById('td4').innerHTML = '';
+                var meet_td5 = document.getElementById('td5').innerHTML = '';
+                var meet_td6 = document.getElementById('td6').innerHTML = '';
+                var meet_td7 = document.getElementById('td7').innerHTML = '';
+                var meet_td8 = document.getElementById('td8').innerHTML = '';
+                var meet_td9 = document.getElementById('td9').innerHTML = '';
+
+
+            }
+
+            if (meet123 == "XXX" || meet456 == "XXX" || meet789 == "XXX" || meet147 == "XXX" || meet258 == "XXX" || meet369 == "XXX" || meet159 == "XXX" || meet357 == "XXX") {
+                meetTotalMatch++;
+                meetCount_1++;
+
+                alert("CONGRATULATION " + meetplayer_1 + " !! YOU WON THE MATCH   " + "\nTOTAL MATCHES: " + meetTotalMatch + "\nYOUR WINS: " + meetCount_1 + "\nDRAWN MATCHES: " + meetDrawn + "\nLOSS MATCHES: " + meetCount_2);
+                reset();
+
+            } else if (meet123 == "000" || meet456 == "000" || meet789 == "000" || meet147 == "000" || meet258 == "000" || meet369 == "000" || meet159 == "000" || meet357 == "000") {
+                meetTotalMatch++;
+                meetCount_2++;
+                alert("CONGRATULATION " + meetplayer_2 + " !! YOU WON THE MATCH   " + "\nTOTAL MATCHES: " + meetTotalMatch + "\nYOUR WINS: " + meetCount_2 + "\nDRAWN MATCHES: " + meetDrawn + "\nLOSS MATCHES: " + meetCount_1);
+                reset();
+
+            } else if (meet123.length == 3 && meet456.length == 3 && meet789.length == 3 && meet147.length == 3 && meet258.length == 3 && meet369.length == 3 && meet159.length == 3 && meet357.length == 3) {
+                meetTotalMatch++;
+                meetDrawn++;
+                alert("OOPS !! MATCH IS DRAWN  " + "\nTOTAL MATCHES: " + meetTotalMatch + "\nDRAWN MATCHES: " + meetDrawn + "\nPLAYER 1 TOTAL WINS:" + meetCount_1 + "\nPLAYER 2 TOTAL WINS:" + meetCount_2);
+
+                reset();
+
+            }
+
+
+            // Set Item
+
+
+
+            localStorage.setItem(meetplayer_1, meetCount_1);
+            localStorage.setItem(meetplayer_2, meetCount_2);
+
+
+
+            // Retrieve
+
+            document.getElementById("result").innerHTML = meetplayer_1 + localStorage.getItem(meetplayer_1);
+
+
+            document.getElementById("result_1").innerHTML = meetplayer_2 + localStorage.getItem(meetplayer_2);
+        }
+
+    } else {
+        alert("please enter your good name!!");
+    }
+</script>
+
+</html>
